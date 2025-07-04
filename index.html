@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mahami - Task Management App</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="favicon.ico" type="image/x-icon" />
+    
+</head>
+<body>
+    <!-- Language toggle button -->
+    <button class="lang-toggle" onclick="toggleLanguage()">
+        <span class="lang-flag" id="langFlag">🇺🇸</span>
+        <span id="langText">English</span>
+    </button>
+
+    <!-- Animated background particles -->
+    <div class="particles" id="particles"></div>
+
+    <header>
+        <div class="header-content">
+            <h1 id="mainTitle">مهامي - Mahami</h1>
+            <p class="subtitle" id="subtitle">إدارة مهام ذكية وسريعة لفرق البرمجة والشركات</p>
+            <div class="buttons">
+                <a href="#" class="btn">
+                    <span>🚀</span>
+                    <span id="tryNowBtn">جرّبه الآن</span>
+                </a>
+                <a href="https://discord.gg/x2rSrq3XWu" class="btn btn-discord" target="_blank">
+                    <span>💬</span>
+                    <span id="discordBtn">انضم لخادم Discord</span>
+                </a>
+                <a href="#screenshots" class="btn btn-secondary">
+                    <span>📸</span>
+                    <span id="screenshotsBtn">شاهد صور التطبيق</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="section fade-in">
+            <h2 class="section-title" id="featuresTitle">⚡ المميزات</h2>
+            <div class="features">
+                <div class="feature-card">
+                    <span class="feature-icon">🧠</span>
+                    <h3 class="feature-title" id="feature1Title">واجهة سهلة الاستخدام</h3>
+                    <p class="feature-description" id="feature1Desc">تصميم بسيط وحديث يساعدك على التركيز على المهام فقط دون تعقيدات.</p>
+                </div>
+                <div class="feature-card">
+                    <span class="feature-icon">🚀</span>
+                    <h3 class="feature-title" id="feature2Title">أداء عالي</h3>
+                    <p class="feature-description" id="feature2Desc">يعمل بكفاءة عالية على جميع الأجهزة مع استهلاك منخفض للذاكرة.</p>
+                </div>
+                <div class="feature-card">
+                    <span class="feature-icon">📊</span>
+                    <h3 class="feature-title" id="feature3Title">تقارير ذكية</h3>
+                    <p class="feature-description" id="feature3Desc">تابع تقدمك ومهام فريقك مع تقارير تفصيلية ورسوم بيانية احترافية.</p>
+                </div>
+                <div class="feature-card">
+                    <span class="feature-icon">💻</span>
+                    <h3 class="feature-title" id="feature4Title">مثالي لفرق البرمجة</h3>
+                    <p class="feature-description" id="feature4Desc">مصمم خصيصًا ليناسب احتياجات فرق التطوير مع أدوات متقدمة.</p>
+                </div>
+                <div class="feature-card">
+                    <span class="feature-icon">🔒</span>
+                    <h3 class="feature-title" id="feature5Title">أمان متقدم</h3>
+                    <p class="feature-description" id="feature5Desc">حماية بيانات عالية المستوى مع تشفير من الطراز الأول.</p>
+                </div>
+                <div class="feature-card">
+                    <span class="feature-icon">🌐</span>
+                    <h3 class="feature-title" id="feature6Title">متاح في كل مكان</h3>
+                    <p class="feature-description" id="feature6Desc">اعمل من أي مكان وأي جهاز مع مزامنة فورية للبيانات.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section fade-in" id="screenshots">
+            <div class="screenshots">
+                <h2 class="section-title" id="screenshotsTitle">📸 صور من داخل التطبيق</h2>
+                
+                <div class="screenshot-grid">
+                    <div class="screenshot-card">
+                        <img src="images/dashboard.png" alt="لوحة التحكم">
+                        <div class="screenshot-overlay">
+                            <span id="screenshot1">لوحة التحكم الرئيسية</span>
+                        </div>
+                    </div>
+                    <div class="screenshot-card">
+                        <img src="images/Management.png" alt="إدارة المهام">
+                        <div class="screenshot-overlay">
+                            <span id="screenshot2">إدارة المهام والمشاريع</span>
+                        </div>
+                    </div>
+                    <div class="screenshot-card">
+                        <img src="images/performance.png" alt="التقارير">
+                        <div class="screenshot-overlay">
+                            <span id="screenshot3">التقارير والإحصائيات</span>
+                        </div>
+                    </div>
+                    <div class="screenshot-card">
+                        <img src="images/employees.png" alt="إعدادات الفريق">
+                        <div class="screenshot-overlay">
+                            <span id="screenshot4">إعدادات الفريق والصلاحيات</span>
+                        </div>
+                    </div>
+                    <div class="screenshot-card">
+                        <img src="images/send_task.png" alt="إرسال المهام">
+                        <div class="screenshot-overlay">
+                            <span id="screenshot5">ارسال المهام بسهولة</span>
+                        </div>
+                    </div>
+                    <div class="screenshot-card">
+                        <img src="images/settings.png" alt="إعدادات التطبيق">
+                        <div class="screenshot-overlay">
+                            <span id="screenshot6">إعدادات سهلة التخصيص</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pricing Plans Section -->
+        <section class="section fade-in">
+            <h2 class="section-title" id="plansTitle">💎 خطط الاشتراك</h2>
+            
+            <!-- Currency Toggle Controls -->
+            <div class="pricing-controls">
+                <button class="currency-toggle active" id="usdToggle" onclick="toggleCurrency('USD')">
+                    <span>💵</span>
+                    <span id="usdText">USD</span>
+                </button>
+                <button class="currency-toggle" id="egpToggle" onclick="toggleCurrency('EGP')">
+                    <span>💶</span>
+                    <span id="egpText">EGP</span>
+                </button>
+            </div>
+
+            <div class="pricing-container">
+                <!-- Free Tier Plan -->
+                <div class="pricing-card free-plan">
+                    <div class="plan-header">
+                        <div class="plan-icon">🟢</div>
+                        <h3 class="plan-name" id="freePlanName">الباقة المجانية</h3>
+                        <div class="plan-price">
+                            <span class="currency" id="freeCurrency">$</span>
+                            <span class="price" id="freePrice">0</span>
+                            <span class="period" id="freePeriod">/شهر</span>
+                        </div>
+                    </div>
+                    <div class="plan-features">
+                        <ul>
+                            <li id="freeFeature1">✅ حتى 3 موظفين</li>
+                            <li id="freeFeature2">✅ حتى 30 مهمة شهرياً</li>
+                            <li id="freeFeature3">❌ بدون إشعارات أو إحصائيات متقدمة</li>
+                            <li id="freeFeature4">✅ جرب النظام مجاناً</li>
+                        </ul>
+                    </div>
+                    <button class="plan-btn" id="freeBtn">ابدأ مجاناً</button>
+                </div>
+
+                <div class="pricing-card basic-plan">
+                    <div class="plan-header">
+                        <div class="plan-icon">🌟</div>
+                        <h3 class="plan-name" id="basicPlanName">الأساسية</h3>
+                        <div class="plan-price">
+                            <span class="old-price" id="basicOldPrice">$5</span>
+                            <span class="currency" id="basicCurrency">$</span>
+                            <span class="price" id="basicPrice">3</span>
+                            <span class="period" id="basicPeriod">/شهر</span>
+                        </div>
+                    </div>
+                    <div class="plan-features">
+                        <ul>
+                            <li id="basicFeature1">✅ إدارة حتى 10 مشاريع</li>
+                            <li id="basicFeature2">✅ فريق من 5 أعضاء</li>
+                            <li id="basicFeature3">✅ تقارير أساسية</li>
+                            <li id="basicFeature4">✅ دعم عبر الإيميل</li>
+                            <li id="basicFeature5">✅ تخزين 5 جيجا</li>
+                        </ul>
+                    </div>
+                    <button class="plan-btn" id="basicBtn">ابدأ الآن</button>
+                </div>
+
+                <div class="pricing-card pro-plan popular">
+                    <div class="popular-badge" id="popularBadge">الأكثر شعبية</div>
+                    <div class="plan-header">
+                        <div class="plan-icon">🚀</div>
+                        <h3 class="plan-name" id="proPlanName">المحترفة</h3>
+                        <div class="plan-price">
+                            <span class="old-price" id="proOldPrice">$10</span>
+                            <span class="currency" id="proCurrency">$</span>
+                            <span class="price" id="proPrice">5</span>
+                            <span class="period" id="proPeriod">/شهر</span>
+                        </div>
+                    </div>
+                    <div class="plan-features">
+                        <ul>
+                            <li id="proFeature1">✅ مشاريع غير محدودة</li>
+                            <li id="proFeature2">✅ فريق من 25 عضو</li>
+                            <li id="proFeature3">✅ تقارير متقدمة</li>
+                            <li id="proFeature4">✅ دعم أولوية</li>
+                            <li id="proFeature5">✅ تخزين 100 جيجا</li>
+                            <li id="proFeature6">✅ تكامل مع الأدوات</li>
+                        </ul>
+                    </div>
+                    <button class="plan-btn" id="proBtn">ابدأ الآن</button>
+                </div>
+
+                <div class="pricing-card premium-plan">
+                    <div class="plan-header">
+                        <div class="plan-icon">👑</div>
+                        <h3 class="plan-name" id="premiumPlanName">المميزة</h3>
+                        <div class="plan-price">
+                            <span class="old-price" id="premiumOldPrice">$20</span>
+                            <span class="currency" id="premiumCurrency">$</span>
+                            <span class="price" id="premiumPrice">15</span>
+                            <span class="period" id="premiumPeriod">/شهر</span>
+                        </div>
+                    </div>
+                    <div class="plan-features">
+                        <ul>
+                            <li id="premiumFeature1">✅ كل شيء في المحترفة</li>
+                            <li id="premiumFeature2">✅ فريق غير محدود</li>
+                            <li id="premiumFeature3">✅ تحليلات متقدمة</li>
+                            <li id="premiumFeature4">✅ دعم مخصص 24/7</li>
+                            <li id="premiumFeature5">✅ تخزين غير محدود</li>
+                            <li id="premiumFeature6">✅ ميزات مخصصة</li>
+                        </ul>
+                    </div>
+                    <button class="plan-btn" id="premiumBtn">ابدأ الآن</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="section fade-in">
+            <div class="contact">
+                <h2 class="section-title" id="contactTitle">📬 تواصل معنا</h2>
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <span>📧</span>
+                        <span id="emailText">Email: <a href="mailto:bodawy.dev@gmail.com">bodawy.dev@gmail.com</a></span>
+                    </div>
+                    <div class="contact-item">
+                        <span>🌐</span>
+                        <span id="websiteText">موقع المطور: <a href="#">Notion Profile</a></span>
+                    </div>
+                    <div class="contact-item">
+                        <span>💬</span>
+                        <span id="discordText">Discord: <a href="https://discord.gg/x2rSrq3XWu">انضم لمجتمعنا</a></span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p id="footerText">&copy; 2025 Mahami. جميع الحقوق محفوظة.</p>
+    </footer>
+
+    <script src="main.js"></script>
+</body>
+</html>
