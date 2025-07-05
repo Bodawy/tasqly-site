@@ -1,5 +1,6 @@
 // Language toggle functionality
 let isArabic = true;
+let currentScreenshotView = 'admin';
 
 const translations = {
     arabic: {
@@ -83,6 +84,8 @@ const translations = {
         freeFeature3: "❌ بدون إشعارات أو إحصائيات متقدمة",
         freeFeature4: "✅ جرب النظام مجاناً",
         freeBtn: "ابدأ مجاناً",
+        employeeText: "واجهة الموظف",
+        adminText: "واجهة الأدمن",
     },
     english: {
         mainTitle: "Mahami - Task Manager",
@@ -165,12 +168,18 @@ const translations = {
         freeFeature3: "❌ No notifications or advanced statistics",
         freeFeature4: "✅ Try the system for free",
         freeBtn: "Start Free",
+        employeeText: "Employee View",
+        adminText: "Admin View",
     }
 };
 
 function toggleLanguage() {
     const html = document.documentElement;
     const currentLang = isArabic ? translations.english : translations.arabic;
+    ['employeeText', 'adminText'].forEach(key => {
+        const el = document.getElementById(key);
+        if (el) el.textContent = currentLang[key];
+    });
 
     // Update text direction
     html.setAttribute('dir', isArabic ? 'ltr' : 'rtl');
@@ -226,6 +235,9 @@ function toggleLanguage() {
         screenshots[5].src = "images/settings.png";
     }
     
+    // Update screenshot captions based on current view and language
+    toggleScreenshotView(currentScreenshotView, isArabic ? 'english' : 'arabic');
+    
     isArabic = !isArabic;
 }
 
@@ -273,6 +285,7 @@ function toggleCurrency(currency) {
 // Optionally, set default currency on page load
 document.addEventListener('DOMContentLoaded', function() {
     toggleCurrency('USD');
+    toggleScreenshotView('admin', 'arabic');
 });
 
 // Create animated particles
@@ -336,3 +349,93 @@ document.querySelectorAll('.feature-card').forEach(card => {
         this.style.transform = 'translateY(0) scale(1)';
     });
 });
+
+function toggleScreenshotView(view, currentLang) {
+    const employeeImages = [
+        { 
+            src: "images/employee_dashboard.png", 
+            captionAr: "لوحة التحكم - الموظف والمهام المعينة", 
+            captionEn: "Dashboard - Employee & Assigned Tasks" 
+        },
+        { 
+            src: "images/notifications.png", 
+            captionAr: "الإشعارات", 
+            captionEn: "Notifications" 
+        },
+        { 
+            src: "images/employee_settings.png", 
+            captionAr: "إعدادات شخصية", 
+            captionEn: "Personal Settings" 
+        },
+        {
+            src: "images/profile.png", 
+            captionAr: "إعدادات الحساب", 
+            captionEn: "Account Settings" 
+        },
+    ];
+
+    const adminImages = [
+        { 
+            src: "images/dashboard.png", 
+            captionAr: "لوحة التحكم الرئيسية", 
+            captionEn: "Main Dashboard" 
+        },
+        { 
+            src: "images/Management.png", 
+            captionAr: "إدارة المهام والمشاريع", 
+            captionEn: "Task & Project Management" 
+        },
+        { 
+            src: "images/performance.png", 
+            captionAr: "التقارير والإحصائيات", 
+            captionEn: "Reports & Statistics" 
+        },
+        { 
+            src: "images/employees.png", 
+            captionAr: "إعدادات الفريق والصلاحيات", 
+            captionEn: "Team Settings & Permissions" 
+        },
+        { 
+            src: "images/send_task.png", 
+            captionAr: "إرسال المهام بسهولة", 
+            captionEn: "Send Tasks Easily" 
+        },
+        { 
+            src: "images/settings.png", 
+            captionAr: "إعدادات سهلة التخصيص", 
+            captionEn: "Easily Customizable Settings" 
+        }
+    ];
+
+    const data = view === 'admin' ? adminImages : employeeImages;
+    const container = document.getElementById('screenshotGrid');
+
+    // Clear existing screenshots
+    container.innerHTML = '';
+
+    // Determine if we're showing Arabic or English based on currentLang
+    const isArabicNow = currentLang === 'arabic';
+    
+    // Add new screenshots with proper captions based on current language
+    data.forEach((item, index) => {
+        const card = document.createElement('div');
+        card.className = 'screenshot-card';
+        
+        // Use the correct caption based on current language
+        const caption = isArabicNow ? item.captionAr : item.captionEn;
+        
+        card.innerHTML = `
+            <img src="${item.src}" alt="${caption}">
+            <div class="screenshot-overlay">
+                <span>${caption}</span>
+            </div>
+        `;
+        container.appendChild(card);
+    });
+
+    // Update button states
+    document.getElementById('employeeToggle').classList.toggle('active', view === 'employee');
+    document.getElementById('adminToggle').classList.toggle('active', view === 'admin');
+
+    currentScreenshotView = view;
+}

@@ -79,8 +79,19 @@
         <section class="section fade-in" id="screenshots">
             <div class="screenshots">
                 <h2 class="section-title" id="screenshotsTitle">📸 صور من داخل التطبيق</h2>
-                
-                <div class="screenshot-grid">
+                <!-- Screenshot View Toggle Controls -->
+                <div class="screenshot-controls">
+                    <button class="view-toggle" id="employeeToggle" onclick="toggleScreenshotView('employee', isArabic ? 'arabic' : 'english')">
+                        <span>👤</span>
+                        <span id="employeeText">واجهة الموظف</span>
+                    </button>
+                    <button class="view-toggle active" id="adminToggle" onclick="toggleScreenshotView('admin', isArabic ? 'arabic' : 'english')">
+                        <span>👨‍💼</span>
+                        <span id="adminText">واجهة الأدمن</span>
+                    </button>
+                </div>
+
+                <div class="screenshot-grid" id="screenshotGrid">
                     <div class="screenshot-card">
                         <img src="images/dashboard.png" alt="لوحة التحكم">
                         <div class="screenshot-overlay">
