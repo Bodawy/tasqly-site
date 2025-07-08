@@ -48,19 +48,21 @@ const translations = {
         basicFeature3: "✅ تقارير أساسية",
         basicFeature4: "✅ دعم عبر الإيميل",
         basicFeature5: "✅ تخزين 5 جيجا",
-        basicBtn: "ابدأ الآن",
+        basicFeature6: "✅ إشعارات لحظية",
         proPlanName: "المحترفة",
+        
         // Pro plan prices
         proOldPrice: "$10",
         proCurrency: "$",
         proPrice: "5",
         proPeriod: "/شهر",
-        proFeature1: "✅ مشاريع غير محدودة",
-        proFeature2: "✅ فريق من 25 عضو",
-        proFeature3: "✅ تقارير متقدمة",
-        proFeature4: "✅ دعم أولوية",
-        proFeature5: "✅ تخزين 100 جيجا",
-        proFeature6: "✅ تكامل مع الأدوات",
+        proFeature1: "✅ فريق من 25 عضو",
+        proFeature2: "✅ حتى 100 مهمة شهرياً",
+        proFeature3: "✅ إحصائيات متقدمة لكل موظف",
+        proFeature4: "✅ تقارير متقدمة",
+        proFeature5: "✅ دعم أولوية",
+        proFeature6: "✅ تخزين 100 جيجا",
+        proFeature8: "✅ إشعارات لحظية",
         proBtn: "ابدأ الآن",
         popularBadge: "الأكثر شعبية",
         premiumPlanName: "المميزة",
@@ -83,9 +85,11 @@ const translations = {
         freeFeature2: "✅ حتى 30 مهمة شهرياً",
         freeFeature3: "❌ بدون إشعارات أو إحصائيات متقدمة",
         freeFeature4: "✅ جرب النظام مجاناً",
-        freeBtn: "ابدأ مجاناً",
         employeeText: "واجهة الموظف",
         adminText: "واجهة الأدمن",
+        freeBtn: "ابدأ مجاناً",
+        basicBtn: "ابدأ الآن",
+        proBtn: "ابدأ الآن",
     },
     english: {
         mainTitle: "Mahami - Task Manager",
@@ -127,24 +131,25 @@ const translations = {
         basicCurrency: "$",
         basicPrice: "3",
         basicPeriod: "/month",
-        basicFeature1: "✅ Manage up to 10 projects",
-        basicFeature2: "✅ Team of 5 members",
+        basicFeature1: "✅ Team of 5 members",
+        basicFeature2: "✅ Up to 50 tasks per month",
         basicFeature3: "✅ Basic reports",
         basicFeature4: "✅ Email support",
         basicFeature5: "✅ 5 GB storage",
-        basicBtn: "Start Now",
+        basicFeature6: "✅ Instant notifications",
         proPlanName: "Pro",
         // Pro plan prices
         proOldPrice: "$10",
         proCurrency: "$",
         proPrice: "5",
         proPeriod: "/month",
-        proFeature1: "✅ Unlimited projects",
-        proFeature2: "✅ Team of 25 members",
-        proFeature3: "✅ Advanced reports",
-        proFeature4: "✅ Priority support",
-        proFeature5: "✅ 100 GB storage",
-        proFeature6: "✅ Tool integrations",
+        proFeature1: "✅ Team of 25 members",
+        proFeature2: "✅ Up to 100 tasks per month",
+        proFeature3: "✅ Advanced stats for each employee",
+        proFeature4: "✅ Advanced reports",
+        proFeature5: "✅ Priority support",
+        proFeature6: "✅ 100 GB storage",
+        proFeature8: "✅ Instant notifications",
         proBtn: "Start Now",
         popularBadge: "Most Popular",
         premiumPlanName: "Premium",
@@ -167,9 +172,11 @@ const translations = {
         freeFeature2: "✅ Up to 30 tasks per month",
         freeFeature3: "❌ No notifications or advanced statistics",
         freeFeature4: "✅ Try the system for free",
-        freeBtn: "Start Free",
         employeeText: "Employee View",
         adminText: "Admin View",
+        freeBtn: "Start Free",
+        basicBtn: "Start Now",
+        proBtn: "Start Now",
     }
 };
 
@@ -238,6 +245,14 @@ function toggleLanguage() {
     // Update screenshot captions based on current view and language
     toggleScreenshotView(currentScreenshotView, isArabic ? 'english' : 'arabic');
     
+    updatePlanFeatures(isArabic ? 'english' : 'arabic');
+
+    // Update button texts for plans
+    ['freeBtn', 'basicBtn', 'proBtn'].forEach(btnId => {
+        const btn = document.getElementById(btnId);
+        if (btn && currentLang[btnId]) btn.textContent = currentLang[btnId];
+    });
+
     isArabic = !isArabic;
 }
 
@@ -286,6 +301,7 @@ function toggleCurrency(currency) {
 document.addEventListener('DOMContentLoaded', function() {
     toggleCurrency('USD');
     toggleScreenshotView('admin', 'arabic');
+    updatePlanFeatures('arabic');
 });
 
 // Create animated particles
@@ -438,4 +454,24 @@ function toggleScreenshotView(view, currentLang) {
     document.getElementById('adminToggle').classList.toggle('active', view === 'admin');
 
     currentScreenshotView = view;
+}
+
+function updatePlanFeatures(lang) {
+    const t = translations[lang];
+    // Free plan
+    for (let i = 1; i <= 4; i++) {
+        const el = document.getElementById(`freeFeature${i}`);
+        if (el) el.textContent = t[`freeFeature${i}`];
+    }
+    // Basic plan
+    for (let i = 1; i <= 6; i++) {
+        const el = document.getElementById(`basicFeature${i}`);
+        if (el) el.textContent = t[`basicFeature${i}`];
+    }
+    // Pro plan
+    // Note: proFeature7 is commented out in your HTML, so skip it
+    [1,2,3,4,5,6,8].forEach(i => {
+        const el = document.getElementById(`proFeature${i}`);
+        if (el) el.textContent = t[`proFeature${i}`];
+    });
 }
