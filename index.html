@@ -3,36 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mahami - Task Management App</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Tasqly - Task Management App</title>
     <link rel="icon" href="favicon.ico" type="image/x-icon" />
+    <!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&family=Tajawal:wght@400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@400;600;700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
     
 </head>
 <body>
     <!-- Language toggle button -->
-    <button class="lang-toggle" onclick="toggleLanguage()">
-        <span class="lang-flag" id="langFlag">🇺🇸</span>
-        <span id="langText">English</span>
-    </button>
+<!-- Language toggle button -->
+<button class="lang-toggle">
+    <span class="lang-flag" id="langFlag"><i class="fas fa-globe"></i></span>
+    <!-- <span id="langText">English</span> -->
+</button>
+
 
     <!-- Animated background particles -->
     <div class="particles" id="particles"></div>
 
     <header>
         <div class="header-content">
-            <h1 id="mainTitle">مهامي - Mahami</h1>
+            <h1 id="mainTitle">تاسكلي - Tasqly</h1>
             <p class="subtitle" id="subtitle">إدارة مهام ذكية وسريعة لفرق البرمجة والشركات</p>
             <div class="buttons">
                 <a href="https://github.com/Bodawy/mahami-site/releases/download/v1.0.0/Mahami.exe" class="btn">
-                    <span>🚀</span>
+                    <i class="fas fa-rocket"></i>
                     <span id="tryNowBtn">جرّبه الآن</span>
                 </a>
-                <a href="https://discord.gg/x2rSrq3XWu" class="btn btn-discord" target="_blank">
-                    <span>💬</span>
+                <a href="https://discord.gg/ukvYNVNqzf" class="btn btn-discord" target="_blank">
+                    <i class="fab fa-discord"></i>
                     <span id="discordBtn">انضم لخادم Discord</span>
                 </a>
                 <a href="#screenshots" class="btn btn-secondary">
-                    <span>📸</span>
+                    <i class="fas fa-images"></i>
                     <span id="screenshotsBtn">شاهد صور التطبيق</span>
                 </a>
             </div>
@@ -41,35 +48,36 @@
 
     <main>
         <section class="section fade-in">
-            <h2 class="section-title" id="featuresTitle">⚡ المميزات</h2>
+            <h2 class="section-title" id="featuresTitle"><i class="fas fa-bolt"></i><span>المميزات</span></h2>
+
             <div class="features">
                 <div class="feature-card">
-                    <span class="feature-icon">🧠</span>
+                    <i class="fas fa-brain feature-icon"></i>
                     <h3 class="feature-title" id="feature1Title">واجهة سهلة الاستخدام</h3>
                     <p class="feature-description" id="feature1Desc">تصميم بسيط وحديث يساعدك على التركيز على المهام فقط دون تعقيدات.</p>
                 </div>
                 <div class="feature-card">
-                    <span class="feature-icon">🚀</span>
+                    <i class="fas fa-tachometer-alt feature-icon"></i>
                     <h3 class="feature-title" id="feature2Title">أداء عالي</h3>
                     <p class="feature-description" id="feature2Desc">يعمل بكفاءة عالية على جميع الأجهزة مع استهلاك منخفض للذاكرة.</p>
                 </div>
                 <div class="feature-card">
-                    <span class="feature-icon">📊</span>
+                    <i class="fas fa-chart-line feature-icon"></i>
                     <h3 class="feature-title" id="feature3Title">تقارير ذكية</h3>
                     <p class="feature-description" id="feature3Desc">تابع تقدمك ومهام فريقك مع تقارير تفصيلية ورسوم بيانية احترافية.</p>
                 </div>
                 <div class="feature-card">
-                    <span class="feature-icon">💻</span>
+                    <i class="fas fa-code feature-icon"></i>
                     <h3 class="feature-title" id="feature4Title">مثالي لفرق البرمجة</h3>
                     <p class="feature-description" id="feature4Desc">مصمم خصيصًا ليناسب احتياجات فرق التطوير مع أدوات متقدمة.</p>
                 </div>
                 <div class="feature-card">
-                    <span class="feature-icon">🔒</span>
+                    <i class="fas fa-shield-alt feature-icon"></i>
                     <h3 class="feature-title" id="feature5Title">أمان متقدم</h3>
                     <p class="feature-description" id="feature5Desc">حماية بيانات عالية المستوى مع تشفير من الطراز الأول.</p>
                 </div>
                 <div class="feature-card">
-                    <span class="feature-icon">🌐</span>
+                    <i class="fas fa-globe feature-icon"></i>
                     <h3 class="feature-title" id="feature6Title">متاح في كل مكان</h3>
                     <p class="feature-description" id="feature6Desc">اعمل من أي مكان وأي جهاز مع مزامنة فورية للبيانات.</p>
                 </div>
@@ -78,15 +86,15 @@
 
         <section class="section fade-in" id="screenshots">
             <div class="screenshots">
-                <h2 class="section-title" id="screenshotsTitle">📸 صور من داخل التطبيق</h2>
-                <!-- Screenshot View Toggle Controls -->
+                <h2 class="section-title" id="screenshotsTitle"><i class="fas fa-camera"></i><span>صور من داخل التطبيق</span></h2>
+                
                 <div class="screenshot-controls">
                     <button class="view-toggle" id="employeeToggle" onclick="toggleScreenshotView('employee', isArabic ? 'arabic' : 'english')">
-                        <span>👤</span>
+                        <i class="fas fa-user"></i>
                         <span id="employeeText">واجهة الموظف</span>
                     </button>
                     <button class="view-toggle active" id="adminToggle" onclick="toggleScreenshotView('admin', isArabic ? 'arabic' : 'english')">
-                        <span>👨‍💼</span>
+                        <i class="fas fa-user-tie"></i>
                         <span id="adminText">واجهة الأدمن</span>
                     </button>
                 </div>
@@ -134,13 +142,12 @@
 
         <!-- Pricing Plans Section -->
         <section class="section fade-in">
-            <h2 class="section-title" id="plansTitle">💎 خطط الاشتراك</h2>
-
+            <h2 class="section-title" id="plansTitle"><i class="fas fa-tags"></i><span>خطط الاشتراك</span></h2>
             <div class="pricing-container">
                 <!-- Free Tier Plan -->
                 <div class="pricing-card free-plan">
                     <div class="plan-header">
-                        <div class="plan-icon">🟢</div>
+                        <span class="plan-icon"><i class="fas fa-user"></i></span>
                         <h3 class="plan-name" id="freePlanName">الباقة المجانية</h3>
                         <div class="plan-price">
                             <span class="currency" id="freeCurrency">$</span>
@@ -150,18 +157,19 @@
                     </div>
                     <div class="plan-features">
                         <ul>
-                            <li id="freeFeature1">✅ حتى 3 موظفين</li>
-                            <li id="freeFeature2">✅ حتى 30 مهمة شهرياً</li>
-                            <li id="freeFeature3">❌ بدون إشعارات أو إحصائيات متقدمة</li>
-                            <li id="freeFeature4">✅ جرب النظام مجاناً</li>
+                            <li id="freeFeature1"><i class="fas fa-users"></i> حتى 3 موظفين</li>
+                            <li id="freeFeature2"><i class="fas fa-tasks"></i> حتى 30 مهمة شهرياً</li>
+                            <li id="freeFeature3"><i class="fas fa-bell-slash"></i> بدون إشعارات أو إحصائيات متقدمة</li>
+                            <li id="freeFeature4"><i class="fas fa-gift"></i> جرب النظام مجاناً</li>
                         </ul>
                     </div>
-                    <button class="plan-btn" id="freeBtn">ابدأ مجاناً</button>
+                    <button class="plan-btn" id="freeBtn" onclick="openModal()">ابدأ مجاناً</button>
                 </div>
-
-                <div class="pricing-card basic-plan">
+                <!-- Basic Plan (most popular) -->
+                <div class="pricing-card basic-plan popular">
+                    <div class="popular-badge" id="popularBadge">الأكثر شعبية</div>
                     <div class="plan-header">
-                        <div class="plan-icon">🌟</div>
+                        <span class="plan-icon"><i class="fas fa-star"></i></span>
                         <h3 class="plan-name" id="basicPlanName">الأساسية</h3>
                         <div class="plan-price">
                             <span class="old-price" id="basicOldPrice">$5</span>
@@ -172,22 +180,20 @@
                     </div>
                     <div class="plan-features">
                         <ul>
-                            <!-- <li id="basicFeature1">✅ إدارة حتى 10 مشاريع</li> -->
-                            <li id="basicFeature1">✅ فريق من 5 أعضاء</li>
-                            <li id="basicFeature2">✅ حتى 50 مهمة شهرياً</li>
-                            <li id="basicFeature3">✅ تقارير أساسية</li>
-                            <li id="basicFeature4">✅ دعم عبر الإيميل</li>
-                            <li id="basicFeature5">✅ تخزين 5 جيجا</li>
-                            <li id="basicFeature6">✅ إشعارات لحظية</li>
+                            <li id="basicFeature1"><i class="fas fa-users"></i> فريق من 5 أعضاء</li>
+                            <li id="basicFeature2"><i class="fas fa-tasks"></i> حتى 50 مهمة شهرياً</li>
+                            <li id="basicFeature3"><i class="fas fa-chart-bar"></i> تقارير أساسية</li>
+                            <li id="basicFeature4"><i class="fas fa-envelope"></i> دعم عبر الإيميل</li>
+                            <li id="basicFeature5"><i class="fas fa-hdd"></i> تخزين 5 جيجا</li>
+                            <li id="basicFeature6"><i class="fas fa-bell"></i> إشعارات لحظية</li>
                         </ul>
                     </div>
                     <button class="plan-btn" id="basicBtn">ابدأ الآن</button>
                 </div>
-
-                <div class="pricing-card pro-plan popular">
-                    <div class="popular-badge" id="popularBadge">الأكثر شعبية</div>
+                <!-- Pro Plan -->
+                <div class="pricing-card pro-plan">
                     <div class="plan-header">
-                        <div class="plan-icon">🚀</div>
+                        <span class="plan-icon"><i class="fas fa-rocket"></i></span>
                         <h3 class="plan-name" id="proPlanName">المحترفة</h3>
                         <div class="plan-price">
                             <span class="old-price" id="proOldPrice">$10</span>
@@ -198,71 +204,80 @@
                     </div>
                     <div class="plan-features">
                         <ul>
-                            <!-- <li id="proFeature1">✅ مشاريع غير محدودة</li> -->
-                            <li id="proFeature1">✅ فريق من 25 عضو</li>
-                            <li id="proFeature2">✅ حتى 100 مهمة شهرياً</li>
-                            <li id="proFeature3">✅ إحصائيات متقدمة لكل موظف</li>
-                            <li id="proFeature4">✅ تقارير متقدمة</li>
-                            <li id="proFeature5">✅ دعم أولوية</li>
-                            <li id="proFeature6">✅ تخزين 100 جيجا</li>
-                            <!-- <li id="proFeature7">✅ تكامل مع الأدوات</li> -->
-                            <li id="proFeature8">✅ إشعارات لحظية</li>
-
+                            <li id="proFeature1"><i class="fas fa-users"></i> فريق من 25 عضو</li>
+                            <li id="proFeature2"><i class="fas fa-tasks"></i> حتى 100 مهمة شهرياً</li>
+                            <li id="proFeature3"><i class="fas fa-chart-line"></i> إحصائيات متقدمة لكل موظف</li>
+                            <li id="proFeature4"><i class="fas fa-file-alt"></i> تقارير متقدمة</li>
+                            <li id="proFeature5"><i class="fas fa-headset"></i> دعم أولوية</li>
+                            <li id="proFeature6"><i class="fas fa-hdd"></i> تخزين 100 جيجا</li>
+                            <li id="proFeature8"><i class="fas fa-bell"></i> إشعارات لحظية</li>
                         </ul>
                     </div>
                     <button class="plan-btn" id="proBtn">ابدأ الآن</button>
                 </div>
-
-                <!-- <div class="pricing-card premium-plan">
-                    <div class="plan-header">
-                        <div class="plan-icon">👑</div>
-                        <h3 class="plan-name" id="premiumPlanName">المميزة</h3>
-                        <div class="plan-price">
-                            <span class="old-price" id="premiumOldPrice">$20</span>
-                            <span class="currency" id="premiumCurrency">$</span>
-                            <span class="price" id="premiumPrice">15</span>
-                            <span class="period" id="premiumPeriod">/شهر</span>
-                        </div>
-                    </div>
-                    <div class="plan-features">
-                        <ul>
-                            <li id="premiumFeature1">✅ كل شيء في المحترفة</li>
-                            <li id="premiumFeature2">✅ فريق غير محدود</li>
-                            <li id="premiumFeature3">✅ تحليلات متقدمة</li>
-                            <li id="premiumFeature4">✅ دعم مخصص 24/7</li>
-                            <li id="premiumFeature5">✅ تخزين غير محدود</li>
-                            <li id="premiumFeature6">✅ ميزات مخصصة</li>
-                        </ul>
-                    </div> -->
-                    <!-- <button class="plan-btn" id="premiumBtn">ابدأ الآن</button> -->
-                </div>
             </div>
         </section>
 
-        <section class="section fade-in">
-            <div class="contact">
-                <h2 class="section-title" id="contactTitle">📬 تواصل معنا</h2>
-                <div class="contact-info">
-                    <div class="contact-item">
-                        <span>📧</span>
-                        <span id="emailText">Email: <a href="mailto:bodawy.dev@gmail.com">bodawy.dev@gmail.com</a></span>
-                    </div>
-                    <div class="contact-item">
-                        <span>🌐</span>
-                        <span id="websiteText">موقع المطور: <a href="#">Notion Profile</a></span>
-                    </div>
-                    <div class="contact-item">
-                        <span>💬</span>
-                        <span id="discordText">Discord: <a href="https://discord.gg/x2rSrq3XWu">انضم لمجتمعنا</a></span>
-                    </div>
-                </div>
-            </div>
-        </section>
+        <!-- Try Now Heading and Download Button before Contact Section -->
+        <h2 class="section-title" id="tryNowTitle" style="margin-bottom: 2rem;">
+            <i class="fas fa-download"></i><span>جرّبه الآن</span>
+        </h2>
+        <div style="display: flex; justify-content: center; margin: 2rem 0;">
+            <a href="https://github.com/Bodawy/mahami-site/releases/download/v1.0.0/Mahami.exe" class="btn" style="min-width:220px;">
+                <i class="fas fa-download"></i>
+                <span id="downloadBtnText">تحميل البرنامج</span>
+            </a>
+        </div>
+<section class="section fade-in">
+    <div class="contact">
+        <h2 class="section-title" id="contactTitle">
+            <i class="fas fa-envelope"></i><span>تواصل معنا</span>
+        </h2>
+
+        <div class="contact-info">
+            <a href="mailto:bodawy.dev@gmail.com" class="btn btn-contact" target="_blank">
+                <i class="fas fa-envelope"></i>
+                <span id="emailText">راسلنا عبر الإيميل</span>
+            </a>
+
+            <a href="#" class="btn btn-contact" target="_blank">
+                <i class="fas fa-globe"></i>
+                <span id="websiteText">موقع المطور</span>
+            </a>
+
+            <a href="https://discord.gg/ukvYNVNqzf" class="btn btn-contact" target="_blank">
+                <i class="fab fa-discord"></i>
+                <span id="discordText">انضم لديسكورد</span>
+            </a>
+        </div>
+    </div>
+</section>
+
     </main>
 
+    <!-- Modal Form -->
+        <div id="signupModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2>التسجيل في الخطة المجانية</h2>
+            <form id="signupForm">
+            <input type="text" placeholder="الاسم الكامل" required />
+            <input type="email" placeholder="البريد الإلكتروني" required />
+            <input type="text" placeholder="اسم الشركة" required />
+            <input type="password" placeholder="كلمة المرور" required />
+            <button type="submit">تسجيل</button>
+            </form>
+        </div>
+        </div>
+
+
     <footer>
-        <p id="footerText">&copy; 2025 Mahami. جميع الحقوق محفوظة.</p>
+        <p id="footerText">&copy; 2025 Tasqly. جميع الحقوق محفوظة.</p>
     </footer>
+    <div id="imageModal" class="image-modal">
+    <span class="modal-close">&times;</span>
+    <img class="modal-image" id="modalImage">
+    </div>
 
     <script src="main.js"></script>
 </body>

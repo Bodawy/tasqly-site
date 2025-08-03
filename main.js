@@ -1,328 +1,85 @@
-// Language toggle functionality
-let isArabic = true;
-let currentScreenshotView = 'admin';
+/**
+ * Tasqly Task Manager - Main JavaScript File
+ * Enhanced structure with better organization and performance
+ */
 
-const translations = {
-    arabic: {
-        mainTitle: "مهامي - Mahami",
-        subtitle: "إدارة مهام ذكية وسريعة لفرق البرمجة والشركات",
-        tryNowBtn: "جرّبه الآن",
-        discordBtn: "انضم لخادم Discord",
-        screenshotsBtn: "شاهد صور التطبيق",
-        featuresTitle: "⚡ المميزات",
-        feature1Title: "واجهة سهلة الاستخدام",
-        feature1Desc: "تصميم بسيط وحديث يساعدك على التركيز على المهام فقط دون تعقيدات.",
-        feature2Title: "أداء عالي",
-        feature2Desc: "يعمل بكفاءة عالية على جميع الأجهزة مع استهلاك منخفض للذاكرة.",
-        feature3Title: "تقارير ذكية",
-        feature3Desc: "تابع تقدمك ومهام فريقك مع تقارير تفصيلية ورسوم بيانية احترافية.",
-        feature4Title: "مثالي لفرق البرمجة",
-        feature4Desc: "مصمم خصيصًا ليناسب احتياجات فرق التطوير مع أدوات متقدمة.",
-        feature5Title: "أمان متقدم",
-        feature5Desc: "حماية بيانات عالية المستوى مع تشفير من الطراز الأول.",
-        feature6Title: "متاح في كل مكان",
-        feature6Desc: "اعمل من أي مكان وأي جهاز مع مزامنة فورية للبيانات.",
-        screenshotsTitle: "📸 صور من داخل التطبيق",
-        screenshot1: "لوحة التحكم الرئيسية",
-        screenshot2: "إدارة المهام والمشاريع",
-        screenshot3: "التقارير والإحصائيات",
-        screenshot4: "إعدادات الفريق والصلاحيات",
-        screenshot5: "إرسال المهام بسهولة",
-        screenshot6: "إعدادات سهلة التخصيص",
-        contactTitle: "📬 تواصل معنا",
-        emailText: "Email: ",
-        websiteText: "موقع المطور: ",
-        discordText: `Discord: <a href="https://discord.gg/x2rSrq3XWu" target="_blank" rel="noopener">انضم لمجتمعنا</a>`,
-        footerText: "© 2025 Mahami. جميع الحقوق محفوظة.",
-        langText: "English",
-        langFlag: "🇺🇸",
-        plansTitle: "💎 خطط الاشتراك",
-        basicPlanName: "الأساسية",
-        // Basic plan prices
-        basicOldPrice: "$5",
-        basicCurrency: "$",
-        basicPrice: "3",
-        basicPeriod: "/شهر",
-        basicFeature1: "✅ إدارة حتى 10 مشاريع",
-        basicFeature2: "✅ فريق من 5 أعضاء",
-        basicFeature3: "✅ تقارير أساسية",
-        basicFeature4: "✅ دعم عبر الإيميل",
-        basicFeature5: "✅ تخزين 5 جيجا",
-        basicFeature6: "✅ إشعارات لحظية",
-        proPlanName: "المحترفة",
+class TasqlyApp {
+    constructor() {
+        this.isArabic = false;
+        this.currentScreenshotView = 'admin';
+        this.currentCurrency = 'USD';
+        this.init();
+    }
+
+    // Initialize the application
+    init() {
+        this.detectLanguage();
+        this.setupEventListeners();
+        this.createParticles();
+        this.setupScrollAnimations();
+        this.initializeContent();
+    }
+
+    // Language detection and setup
+    detectLanguage() {
+        const browserLang = navigator.language || navigator.userLanguage;
+        this.isArabic = browserLang.startsWith('ar');
         
-        // Pro plan prices
-        proOldPrice: "$10",
-        proCurrency: "$",
-        proPrice: "5",
-        proPeriod: "/شهر",
-        proFeature1: "✅ فريق من 25 عضو",
-        proFeature2: "✅ حتى 100 مهمة شهرياً",
-        proFeature3: "✅ إحصائيات متقدمة لكل موظف",
-        proFeature4: "✅ تقارير متقدمة",
-        proFeature5: "✅ دعم أولوية",
-        proFeature6: "✅ تخزين 100 جيجا",
-        proFeature8: "✅ إشعارات لحظية",
-        proBtn: "ابدأ الآن",
-        popularBadge: "الأكثر شعبية",
-        premiumPlanName: "المميزة",
-        // Premium plan prices
-        premiumOldPrice: "$20",
-        premiumCurrency: "$",
-        premiumPrice: "15",
-        premiumPeriod: "/شهر",
-        premiumFeature1: "✅ كل شيء في المحترفة",
-        premiumFeature2: "✅ فريق غير محدود",
-        premiumFeature3: "✅ تحليلات متقدمة",
-        premiumFeature4: "✅ دعم مخصص 24/7",
-        premiumFeature5: "✅ تخزين غير محدود",
-        premiumFeature6: "✅ ميزات مخصصة",
-        premiumBtn: "ابدأ الآن",
-        // Free plan
-        freePlanName: "الباقة المجانية",
-        freePeriod: "/شهر",
-        freeFeature1: "✅ حتى 3 موظفين",
-        freeFeature2: "✅ حتى 30 مهمة شهرياً",
-        freeFeature3: "❌ بدون إشعارات أو إحصائيات متقدمة",
-        freeFeature4: "✅ جرب النظام مجاناً",
-        employeeText: "واجهة الموظف",
-        adminText: "واجهة الأدمن",
-        freeBtn: "ابدأ مجاناً",
-        basicBtn: "ابدأ الآن",
-        proBtn: "ابدأ الآن",
-    },
-    english: {
-        mainTitle: "Mahami - Task Manager",
-        subtitle: "Smart and fast task management for programming teams and companies",
-        tryNowBtn: "Try It Now",
-        discordBtn: "Join Discord Server",
-        screenshotsBtn: "View Screenshots",
-        featuresTitle: "⚡ Features",
-        feature1Title: "Easy to Use Interface",
-        feature1Desc: "Simple and modern design that helps you focus on tasks without complications.",
-        feature2Title: "High Performance",
-        feature2Desc: "Works efficiently on all devices with low memory consumption.",
-        feature3Title: "Smart Reports",
-        feature3Desc: "Track your progress and team tasks with detailed reports and professional charts.",
-        feature4Title: "Perfect for Programming Teams",
-        feature4Desc: "Specially designed to meet the needs of development teams with advanced tools.",
-        feature5Title: "Advanced Security",
-        feature5Desc: "High-level data protection with first-class encryption.",
-        feature6Title: "Available Everywhere",
-        feature6Desc: "Work from anywhere and any device with instant data synchronization.",
-        screenshotsTitle: "📸 App Screenshots",
-        screenshot1: "Main Dashboard",
-        screenshot2: "Task & Project Management",
-        screenshot3: "Reports & Statistics",
-        screenshot4: "Team Settings & Permissions",
-        screenshot5: "Send tasks easily",
-        screenshot6: "Easily customizable settings",
-        contactTitle: "📬 Contact Us",
-        emailText: "Email: ",
-        websiteText: "Developer Website: ",
-        discordText: `Discord: <a href="https://discord.gg/x2rSrq3XWu" target="_blank" rel="noopener">Join our community</a>`,
-        footerText: "© 2025 Mahami. All rights reserved.",
-        langText: "العربية",
-        langFlag: "🇪🇬",
-        plansTitle: "💎 Subscription Plans",
-        basicPlanName: "Basic",
-        // Basic plan prices
-        basicOldPrice: "$5",
-        basicCurrency: "$",
-        basicPrice: "3",
-        basicPeriod: "/month",
-        basicFeature1: "✅ Team of 5 members",
-        basicFeature2: "✅ Up to 50 tasks per month",
-        basicFeature3: "✅ Basic reports",
-        basicFeature4: "✅ Email support",
-        basicFeature5: "✅ 5 GB storage",
-        basicFeature6: "✅ Instant notifications",
-        proPlanName: "Pro",
-        // Pro plan prices
-        proOldPrice: "$10",
-        proCurrency: "$",
-        proPrice: "5",
-        proPeriod: "/month",
-        proFeature1: "✅ Team of 25 members",
-        proFeature2: "✅ Up to 100 tasks per month",
-        proFeature3: "✅ Advanced stats for each employee",
-        proFeature4: "✅ Advanced reports",
-        proFeature5: "✅ Priority support",
-        proFeature6: "✅ 100 GB storage",
-        proFeature8: "✅ Instant notifications",
-        proBtn: "Start Now",
-        popularBadge: "Most Popular",
-        premiumPlanName: "Premium",
-        // Premium plan prices
-        premiumOldPrice: "$20",
-        premiumCurrency: "$",
-        premiumPrice: "15",
-        premiumPeriod: "/month",
-        premiumFeature1: "✅ Everything in Pro",
-        premiumFeature2: "✅ Unlimited team",
-        premiumFeature3: "✅ Advanced analytics",
-        premiumFeature4: "✅ 24/7 dedicated support",
-        premiumFeature5: "✅ Unlimited storage",
-        premiumFeature6: "✅ Custom features",
-        premiumBtn: "Start Now",
-        // Free plan
-        freePlanName: "Free Tier",
-        freePeriod: "/month",
-        freeFeature1: "✅ Up to 3 employees",
-        freeFeature2: "✅ Up to 30 tasks per month",
-        freeFeature3: "❌ No notifications or advanced statistics",
-        freeFeature4: "✅ Try the system for free",
-        employeeText: "Employee View",
-        adminText: "Admin View",
-        freeBtn: "Start Free",
-        basicBtn: "Start Now",
-        proBtn: "Start Now",
+        document.documentElement.setAttribute('dir', this.isArabic ? 'rtl' : 'ltr');
+        this.updateLanguageToggle();
     }
-};
 
-function toggleLanguage() {
-    const html = document.documentElement;
-    const currentLang = isArabic ? translations.english : translations.arabic;
-    ['employeeText', 'adminText'].forEach(key => {
-        const el = document.getElementById(key);
-        if (el) el.textContent = currentLang[key];
-    });
+    // Update language toggle button
+    updateLanguageToggle() {
+        const langText = document.getElementById('langText');
+        const langFlag = document.getElementById('langFlag');
+        
+        if (langText) langText.textContent = this.isArabic ? "English" : "العربية";
 
-    // Update text direction
-    html.setAttribute('dir', isArabic ? 'ltr' : 'rtl');
-
-    // Update all text elements
-    Object.keys(currentLang).forEach(key => {
-        const element = document.getElementById(key);
-        if (element) {
-            if (key === 'emailText' || key === 'websiteText') {
-                element.innerHTML = currentLang[key] + element.querySelector('a').outerHTML;
-            } else if (key === 'discordText') {
-                element.innerHTML = currentLang[key];
-            } else {
-                element.textContent = currentLang[key];
-            }
+        if (langFlag) {
+            langFlag.innerHTML = `<i class="fa fa-globe"></i> ${this.isArabic ? "English" : "العربية"}`;
         }
-    });
-
-    // Update plan prices and currencies (old and new)
-    const priceKeys = [
-        { old: 'basicOldPrice', currency: 'basicCurrency', price: 'basicPrice', period: 'basicPeriod' },
-        { old: 'proOldPrice', currency: 'proCurrency', price: 'proPrice', period: 'proPeriod' },
-        { old: 'premiumOldPrice', currency: 'premiumCurrency', price: 'premiumPrice', period: 'premiumPeriod' }
-    ];
-    priceKeys.forEach(plan => {
-        const oldEl = document.getElementById(plan.old);
-        const currencyEl = document.getElementById(plan.currency);
-        const priceEl = document.getElementById(plan.price);
-        const periodEl = document.getElementById(plan.period);
-        if (oldEl) oldEl.textContent = currentLang[plan.old];
-        if (currencyEl) currencyEl.textContent = currentLang[plan.currency];
-        if (priceEl) priceEl.textContent = currentLang[plan.price];
-        if (periodEl) periodEl.textContent = currentLang[plan.period];
-    });
-
-    // Update screenshot images
-    const screenshots = document.querySelectorAll('.screenshot-card img');
-    if (isArabic) {
-        // English versions
-        screenshots[0].src = "images/dashboard.png";
-        screenshots[1].src = "images/Management.png";
-        screenshots[2].src = "images/performance.png";
-        screenshots[3].src = "images/employees.png";
-        screenshots[4].src = "images/send_task.png";
-        screenshots[5].src = "images/settings.png";
-    } else {
-        // Arabic versions
-        screenshots[0].src = "images/dashboard.png";
-        screenshots[1].src = "images/Management.png";
-        screenshots[2].src = "images/performance.png";
-        screenshots[3].src = "images/employees.png";
-        screenshots[4].src = "images/send_task.png";
-        screenshots[5].src = "images/settings.png";
     }
-    
-    // Update screenshot captions based on current view and language
-    toggleScreenshotView(currentScreenshotView, isArabic ? 'english' : 'arabic');
-    
-    updatePlanFeatures(isArabic ? 'english' : 'arabic');
 
-    // Update button texts for plans
-    ['freeBtn', 'basicBtn', 'proBtn'].forEach(btnId => {
-        const btn = document.getElementById(btnId);
-        if (btn && currentLang[btnId]) btn.textContent = currentLang[btnId];
-    });
 
-    isArabic = !isArabic;
-}
 
-// Currency values for each plan
-const pricingData = {
-    USD: {
-        free: { price: 0, currency: "$", old: null },
-        basic: { price: 3, currency: "$", old: "$5" },
-        pro: { price: 5, currency: "$", old: "$10" },
-        premium: { price: 15, currency: "$", old: "$20" }
-    },
-    EGP: {
-        free: { price: 0, currency: "ج.م", old: null },
-        basic: { price: 90, currency: "ج.م", old: "150ج.م" },
-        pro: { price: 150, currency: "ج.م", old: "300ج.م" },
-        premium: { price: 450, currency: "ج.م", old: "600ج.م" }
+    // Setup all event listeners
+    setupEventListeners() {
+        // Language toggle
+        const langToggle = document.querySelector('.lang-toggle');
+        if (langToggle) {
+            langToggle.addEventListener('click', () => this.toggleLanguage());
+        }
+
+        // Screenshot view toggles
+        const employeeToggle = document.getElementById('employeeToggle');
+        const adminToggle = document.getElementById('adminToggle');
+        
+        if (employeeToggle) {
+            employeeToggle.addEventListener('click', () => this.toggleScreenshotView('employee'));
+        }
+        
+        if (adminToggle) {
+            adminToggle.addEventListener('click', () => this.toggleScreenshotView('admin'));
+        }
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', this.handleSmoothScroll);
+        });
+
+        // Modal events
+        this.setupModalEvents();
+        
+        // Screenshot modal events
+        this.setupScreenshotModal();
+
+        // Plan buttons
+        this.setupPlanButtons();
     }
-};
 
-function toggleCurrency(currency) {
-    // Toggle button active state
-    document.getElementById('usdToggle').classList.toggle('active', currency === 'USD');
-    document.getElementById('egpToggle').classList.toggle('active', currency === 'EGP');
-
-    // Update Free Plan
-    document.getElementById('freeCurrency').textContent = pricingData[currency].free.currency;
-    document.getElementById('freePrice').textContent = pricingData[currency].free.price;
-
-    // Update Basic Plan
-    document.getElementById('basicCurrency').textContent = pricingData[currency].basic.currency;
-    document.getElementById('basicPrice').textContent = pricingData[currency].basic.price;
-    document.getElementById('basicOldPrice').textContent = pricingData[currency].basic.old || '';
-
-    // Update Pro Plan
-    document.getElementById('proCurrency').textContent = pricingData[currency].pro.currency;
-    document.getElementById('proPrice').textContent = pricingData[currency].pro.price;
-    document.getElementById('proOldPrice').textContent = pricingData[currency].pro.old || '';
-
-    // Update Premium Plan
-    document.getElementById('premiumCurrency').textContent = pricingData[currency].premium.currency;
-    document.getElementById('premiumPrice').textContent = pricingData[currency].premium.price;
-    document.getElementById('premiumOldPrice').textContent = pricingData[currency].premium.old || '';
-}
-
-// Optionally, set default currency on page load
-document.addEventListener('DOMContentLoaded', function() {
-    toggleCurrency('USD');
-    toggleScreenshotView('admin', 'arabic');
-    updatePlanFeatures('arabic');
-});
-
-// Create animated particles
-function createParticles() {
-    const particlesContainer = document.getElementById('particles');
-    const particleCount = 50;
-    
-    for (let i = 0; i < particleCount; i++) {
-        const particle = document.createElement('div');
-        particle.className = 'particle';
-        particle.style.left = Math.random() * 100 + '%';
-        particle.style.top = Math.random() * 100 + '%';
-        particle.style.animationDelay = Math.random() * 6 + 's';
-        particle.style.animationDuration = (Math.random() * 3 + 3) + 's';
-        particlesContainer.appendChild(particle);
-    }
-}
-
-// Smooth scrolling for anchor links
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
+    // Handle smooth scrolling
+    handleSmoothScroll(e) {
         e.preventDefault();
         const target = document.querySelector(this.getAttribute('href'));
         if (target) {
@@ -331,114 +88,169 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 block: 'start'
             });
         }
-    });
-});
+    }
 
-// Intersection Observer for scroll animations
-const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
-};
-
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.style.animationPlayState = 'running';
+    // Setup modal events
+    setupModalEvents() {
+        const modal = document.getElementById('signupModal');
+        const closeBtn = modal?.querySelector('.close');
+        
+        if (closeBtn) {
+            closeBtn.addEventListener('click', () => this.closeModal());
         }
-    });
-}, observerOptions);
 
-document.querySelectorAll('.fade-in').forEach(el => {
-    observer.observe(el);
-});
+        // Close modal when clicking outside
+        window.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                this.closeModal();
+            }
+        });
 
-// Initialize particles when page loads
-window.addEventListener('load', createParticles);
+        // Close modal with ESC key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                this.closeModal();
+                this.closeImageModal();
+            }
+        });
+    }
 
-// Add hover effects to feature cards
-document.querySelectorAll('.feature-card').forEach(card => {
-    card.addEventListener('mouseenter', function() {
-        this.style.transform = 'translateY(-15px) scale(1.02)';
-    });
-    
-    card.addEventListener('mouseleave', function() {
-        this.style.transform = 'translateY(0) scale(1)';
-    });
-});
-
-function toggleScreenshotView(view, currentLang) {
-    const employeeImages = [
-        { 
-            src: "images/employee_dashboard.png", 
-            captionAr: "لوحة التحكم - الموظف والمهام المعينة", 
-            captionEn: "Dashboard - Employee & Assigned Tasks" 
-        },
-        { 
-            src: "images/notifications.png", 
-            captionAr: "الإشعارات", 
-            captionEn: "Notifications" 
-        },
-        { 
-            src: "images/employee_settings.png", 
-            captionAr: "إعدادات شخصية", 
-            captionEn: "Personal Settings" 
-        },
-        {
-            src: "images/profile.png", 
-            captionAr: "إعدادات الحساب", 
-            captionEn: "Account Settings" 
-        },
-    ];
-
-    const adminImages = [
-        { 
-            src: "images/dashboard.png", 
-            captionAr: "لوحة التحكم الرئيسية", 
-            captionEn: "Main Dashboard" 
-        },
-        { 
-            src: "images/Management.png", 
-            captionAr: "إدارة المهام والمشاريع", 
-            captionEn: "Task & Project Management" 
-        },
-        { 
-            src: "images/performance.png", 
-            captionAr: "التقارير والإحصائيات", 
-            captionEn: "Reports & Statistics" 
-        },
-        { 
-            src: "images/employees.png", 
-            captionAr: "إعدادات الفريق والصلاحيات", 
-            captionEn: "Team Settings & Permissions" 
-        },
-        { 
-            src: "images/send_task.png", 
-            captionAr: "إرسال المهام بسهولة", 
-            captionEn: "Send Tasks Easily" 
-        },
-        { 
-            src: "images/settings.png", 
-            captionAr: "إعدادات سهلة التخصيص", 
-            captionEn: "Easily Customizable Settings" 
+    // Setup screenshot modal
+    setupScreenshotModal() {
+        const imageModal = document.getElementById('imageModal');
+        const modalClose = document.querySelector('.modal-close');
+        
+        if (modalClose) {
+            modalClose.addEventListener('click', () => this.closeImageModal());
         }
-    ];
 
-    const data = view === 'admin' ? adminImages : employeeImages;
-    const container = document.getElementById('screenshotGrid');
+        if (imageModal) {
+            imageModal.addEventListener('click', (e) => {
+                if (e.target === imageModal) {
+                    this.closeImageModal();
+                }
+            });
+        }
+    }
 
-    // Clear existing screenshots
-    container.innerHTML = '';
+    // Setup plan buttons
+    setupPlanButtons() {
+        const freeBtn = document.getElementById('freeBtn');
+        if (freeBtn) {
+            freeBtn.addEventListener('click', () => this.openModal());
+        }
+    }
 
-    // Determine if we're showing Arabic or English based on currentLang
-    const isArabicNow = currentLang === 'arabic';
-    
-    // Add new screenshots with proper captions based on current language
-    data.forEach((item, index) => {
+    // Toggle language
+    toggleLanguage() {
+        this.isArabic = !this.isArabic;
+        
+        // Update direction
+        // document.documentElement.setAttribute('dir', this.isArabic ? 'ltr' : 'rtl');
+        document.documentElement.setAttribute('dir', this.isArabic ? 'rtl' : 'ltr');
+
+        
+        // Update language toggle
+        this.updateLanguageToggle();
+        
+        // Update all translations
+        this.updateTranslations();
+        
+        // Update screenshot view
+        this.updateScreenshotView();
+        
+        // Update plan features
+        this.updatePlanFeatures();
+    }
+
+    // Update all translations
+    updateTranslations() {
+        const currentLang = this.isArabic ? 'arabic' : 'english';
+        const translations = this.getTranslations()[currentLang];
+        
+        Object.keys(translations).forEach(key => {
+            const element = document.getElementById(key);
+            if (!element) return;
+
+            if (this.isTitleElement(key)) {
+                const span = element.querySelector('span');
+                if (span) span.textContent = translations[key];
+            } else if (key === 'emailText' || key === 'websiteText' || key === 'discordText') {
+                element.textContent = translations[key];
+            } else {
+                element.textContent = translations[key];
+            }
+        });
+
+        this.updatePrices(currentLang);
+    }
+
+    // Check if element is a title element
+    isTitleElement(key) {
+        return ['featuresTitle', 'screenshotsTitle', 'plansTitle', 'contactTitle', 'tryNowTitle'].includes(key);
+    }
+
+    // Update prices
+    updatePrices(lang) {
+        const translations = this.getTranslations()[lang];
+        const priceKeys = [
+            { old: 'basicOldPrice', currency: 'basicCurrency', price: 'basicPrice', period: 'basicPeriod' },
+            { old: 'proOldPrice', currency: 'proCurrency', price: 'proPrice', period: 'proPeriod' }
+        ];
+
+        priceKeys.forEach(plan => {
+            const elements = {
+                old: document.getElementById(plan.old),
+                currency: document.getElementById(plan.currency),
+                price: document.getElementById(plan.price),
+                period: document.getElementById(plan.period)
+            };
+
+            Object.keys(elements).forEach(type => {
+                if (elements[type] && translations[plan[type]]) {
+                    elements[type].textContent = translations[plan[type]];
+                }
+            });
+        });
+    }
+
+    // Update screenshot view
+    updateScreenshotView() {
+        this.toggleScreenshotView(this.currentScreenshotView);
+    }
+
+    // Toggle screenshot view
+    toggleScreenshotView(view) {
+        this.currentScreenshotView = view;
+        
+        const images = this.getScreenshotImages();
+        const data = images[view];
+        const container = document.getElementById('screenshotGrid');
+        
+        if (!container || !data) return;
+
+        // Clear existing content
+        container.innerHTML = '';
+
+        // Add new screenshots
+        data.forEach(item => {
+            const card = this.createScreenshotCard(item);
+            container.appendChild(card);
+        });
+
+        // Update button states
+        this.updateScreenshotButtons(view);
+        
+        // Attach event listeners to new cards
+        this.attachScreenshotListeners();
+    }
+
+    // Create screenshot card
+    createScreenshotCard(item) {
         const card = document.createElement('div');
         card.className = 'screenshot-card';
         
-        // Use the correct caption based on current language
-        const caption = isArabicNow ? item.captionAr : item.captionEn;
+        const caption = this.isArabic ? item.captionAr : item.captionEn;
         
         card.innerHTML = `
             <img src="${item.src}" alt="${caption}">
@@ -446,32 +258,408 @@ function toggleScreenshotView(view, currentLang) {
                 <span>${caption}</span>
             </div>
         `;
-        container.appendChild(card);
-    });
+        
+        return card;
+    }
 
-    // Update button states
-    document.getElementById('employeeToggle').classList.toggle('active', view === 'employee');
-    document.getElementById('adminToggle').classList.toggle('active', view === 'admin');
+    // Update screenshot buttons
+    updateScreenshotButtons(view) {
+        const employeeBtn = document.getElementById('employeeToggle');
+        const adminBtn = document.getElementById('adminToggle');
+        
+        if (employeeBtn) employeeBtn.classList.toggle('active', view === 'employee');
+        if (adminBtn) adminBtn.classList.toggle('active', view === 'admin');
+    }
 
-    currentScreenshotView = view;
+    // Attach screenshot listeners
+    attachScreenshotListeners() {
+        document.querySelectorAll('.screenshot-card').forEach(card => {
+            card.addEventListener('click', () => {
+                const img = card.querySelector('img');
+                this.openImageModal(img.src);
+            });
+        });
+    }
+
+    // Update plan features
+    updatePlanFeatures() {
+        const lang = this.isArabic ? 'arabic' : 'english';
+        const translations = this.getTranslations()[lang];
+        
+        this.updatePlanFeatureSet('free', 4, translations);
+        this.updatePlanFeatureSet('basic', 6, translations);
+        this.updatePlanFeatureSet('pro', [1, 2, 3, 4, 5, 6, 8], translations);
+    }
+
+    // Update plan feature set
+    updatePlanFeatureSet(planType, features, translations) {
+        const icons = this.getPlanIcons(planType);
+        const featureArray = Array.isArray(features) ? features : Array.from({length: features}, (_, i) => i + 1);
+        
+        featureArray.forEach((featureNum, index) => {
+            const element = document.getElementById(`${planType}Feature${featureNum}`);
+            const translationKey = `${planType}Feature${featureNum}`;
+            
+            if (element && translations[translationKey]) {
+                element.innerHTML = `${icons[index]} ${translations[translationKey]}`;
+            }
+        });
+    }
+
+    // Get plan icons
+    getPlanIcons(planType) {
+        const iconSets = {
+            free: [
+                '<i class="fas fa-users"></i>',
+                '<i class="fas fa-tasks"></i>',
+                '<i class="fas fa-bell-slash"></i>',
+                '<i class="fas fa-gift"></i>'
+            ],
+            basic: [
+                '<i class="fas fa-users"></i>',
+                '<i class="fas fa-tasks"></i>',
+                '<i class="fas fa-chart-bar"></i>',
+                '<i class="fas fa-envelope"></i>',
+                '<i class="fas fa-hdd"></i>',
+                '<i class="fas fa-bell"></i>'
+            ],
+            pro: [
+                '<i class="fas fa-users"></i>',
+                '<i class="fas fa-tasks"></i>',
+                '<i class="fas fa-chart-line"></i>',
+                '<i class="fas fa-file-alt"></i>',
+                '<i class="fas fa-headset"></i>',
+                '<i class="fas fa-hdd"></i>',
+                '<i class="fas fa-bell"></i>'
+            ]
+        };
+        
+        return iconSets[planType] || [];
+    }
+
+    // Create animated particles
+    createParticles() {
+        const container = document.getElementById('particles');
+        if (!container) return;
+
+        const particleCount = 50;
+        
+        for (let i = 0; i < particleCount; i++) {
+            const particle = this.createParticle();
+            container.appendChild(particle);
+        }
+    }
+
+    // Create single particle
+    createParticle() {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        particle.style.left = Math.random() * 100 + '%';
+        particle.style.top = Math.random() * 100 + '%';
+        particle.style.animationDelay = Math.random() * 6 + 's';
+        particle.style.animationDuration = (Math.random() * 3 + 3) + 's';
+        return particle;
+    }
+
+    // Setup scroll animations
+    setupScrollAnimations() {
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationPlayState = 'running';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+    }
+
+    // Initialize content
+    initializeContent() {
+        const lang = this.isArabic ? 'arabic' : 'english';
+        this.updateTranslations();
+        this.toggleScreenshotView('admin');
+        this.updatePlanFeatures();
+    }
+
+    // Modal functions
+    openModal() {
+        const modal = document.getElementById('signupModal');
+        if (modal) {
+            modal.style.display = 'flex';
+        }
+    }
+
+    closeModal() {
+        const modal = document.getElementById('signupModal');
+        if (modal) {
+            modal.style.display = 'none';
+        }
+    }
+
+    // Image modal functions
+    openImageModal(imageSrc) {
+        const modal = document.getElementById('imageModal');
+        const modalImg = document.getElementById('modalImage');
+        
+        if (modal && modalImg) {
+            modal.style.display = 'flex';
+            modalImg.src = imageSrc;
+        }
+    }
+
+    closeImageModal() {
+        const modal = document.getElementById('imageModal');
+        if (modal) {
+            modal.style.display = 'none';
+        }
+    }
+
+    // Get screenshot images data
+    getScreenshotImages() {
+        return {
+            employee: [
+                { 
+                    src: "images/employee_dashboard.png", 
+                    captionAr: "لوحة التحكم - الموظف والمهام المعينة", 
+                    captionEn: "Dashboard - Employee & Assigned Tasks" 
+                },
+                { 
+                    src: "images/notifications.png", 
+                    captionAr: "الإشعارات", 
+                    captionEn: "Notifications" 
+                },
+                { 
+                    src: "images/employee_settings.png", 
+                    captionAr: "إعدادات شخصية", 
+                    captionEn: "Personal Settings" 
+                },
+                {
+                    src: "images/profile.png", 
+                    captionAr: "إعدادات الحساب", 
+                    captionEn: "Account Settings" 
+                }
+            ],
+            admin: [
+                { 
+                    src: "images/dashboard.png", 
+                    captionAr: "لوحة التحكم الرئيسية", 
+                    captionEn: "Main Dashboard" 
+                },
+                { 
+                    src: "images/Management.png", 
+                    captionAr: "إدارة المهام والمشاريع", 
+                    captionEn: "Task & Project Management" 
+                },
+                { 
+                    src: "images/performance.png", 
+                    captionAr: "التقارير والإحصائيات", 
+                    captionEn: "Reports & Statistics" 
+                },
+                { 
+                    src: "images/employees.png", 
+                    captionAr: "إعدادات الفريق والصلاحيات", 
+                    captionEn: "Team Settings & Permissions" 
+                },
+                { 
+                    src: "images/send_task.png", 
+                    captionAr: "إرسال المهام بسهولة", 
+                    captionEn: "Send Tasks Easily" 
+                },
+                { 
+                    src: "images/settings.png", 
+                    captionAr: "إعدادات سهلة التخصيص", 
+                    captionEn: "Easily Customizable Settings" 
+                }
+            ]
+        };
+    }
+
+    // Get translations object
+    getTranslations() {
+        return {
+            arabic: {
+                mainTitle: "برنامج إدارة مهام- Tasqly",
+                subtitle: "إدارة مهام ذكية وسريعة لفرق البرمجة والشركات",
+                tryNowBtn: "جرّبه الآن",
+                discordBtn: "انضم لخادم Discord",
+                screenshotsBtn: "شاهد صور التطبيق",
+                featuresTitle: "المميزات",
+                feature1Title: "واجهة سهلة الاستخدام",
+                feature1Desc: "تصميم بسيط وحديث يساعدك على التركيز على المهام فقط دون تعقيدات.",
+                feature2Title: "أداء عالي",
+                feature2Desc: "يعمل بكفاءة عالية على جميع الأجهزة مع استهلاك منخفض للذاكرة.",
+                feature3Title: "تقارير ذكية",
+                feature3Desc: "تابع تقدمك ومهام فريقك مع تقارير تفصيلية ورسوم بيانية احترافية.",
+                feature4Title: "مثالي لفرق البرمجة",
+                feature4Desc: "مصمم خصيصًا ليناسب احتياجات فرق التطوير مع أدوات متقدمة.",
+                feature5Title: "أمان متقدم",
+                feature5Desc: "حماية بيانات عالية المستوى مع تشفير من الطراز الأول.",
+                feature6Title: "متاح في كل مكان",
+                feature6Desc: "اعمل من أي مكان وأي جهاز مع مزامنة فورية للبيانات.",
+                screenshotsTitle: "صور من داخل التطبيق",
+                plansTitle: "خطط الاشتراك",
+                contactTitle: "تواصل معنا",
+                tryNowTitle: "جرّبه الآن",
+                downloadBtnText: "تحميل البرنامج",
+                emailText: "راسلنا عبر الإيميل",
+                websiteText: "موقع المطور",
+                discordText: "انضم لديسكورد",
+                footerText: "© 2025 Tasqly. جميع الحقوق محفوظة.",
+                langText: "English",
+                // langFlag: "🇺🇸",
+                // Free plan
+                freePlanName: "الباقة المجانية",
+                freePeriod: "/شهر",
+                freeFeature1: "حتى 3 موظفين",
+                freeFeature2: "حتى 30 مهمة شهرياً",
+                freeFeature3: "بدون إشعارات أو إحصائيات متقدمة",
+                freeFeature4: "جرب النظام مجاناً",
+                freeBtn: "ابدأ مجاناً",
+                // Basic plan
+                basicPlanName: "الأساسية",
+                basicOldPrice: "$5",
+                basicCurrency: "$",
+                basicPrice: "3",
+                basicPeriod: "/شهر",
+                basicFeature1: "فريق من 5 أعضاء",
+                basicFeature2: "حتى 50 مهمة شهرياً",
+                basicFeature3: "تقارير أساسية",
+                basicFeature4: "دعم عبر الإيميل",
+                basicFeature5: "تخزين 5 جيجا",
+                basicFeature6: "إشعارات لحظية",
+                basicBtn: "ابدأ الآن",
+                // Pro plan
+                proPlanName: "المحترفة",
+                proOldPrice: "$10",
+                proCurrency: "$",
+                proPrice: "5",
+                proPeriod: "/شهر",
+                proFeature1: "فريق من 25 عضو",
+                proFeature2: "حتى 100 مهمة شهرياً",
+                proFeature3: "إحصائيات متقدمة لكل موظف",
+                proFeature4: "تقارير متقدمة",
+                proFeature5: "دعم أولوية",
+                proFeature6: "تخزين 100 جيجا",
+                proFeature8: "إشعارات لحظية",
+                proBtn: "ابدأ الآن",
+                popularBadge: "الأكثر شعبية",
+                employeeText: "واجهة الموظف",
+                adminText: "واجهة الأدمن"
+            },
+            english: {
+                mainTitle: "Tasqly - Task Manager",
+                subtitle: "Smart and fast task management for programming teams and companies",
+                tryNowBtn: "Try It Now",
+                discordBtn: "Join Discord Server",
+                screenshotsBtn: "View Screenshots",
+                featuresTitle: "Features",
+                feature1Title: "Easy to Use Interface",
+                feature1Desc: "Simple and modern design that helps you focus on tasks without complications.",
+                feature2Title: "High Performance",
+                feature2Desc: "Works efficiently on all devices with low memory consumption.",
+                feature3Title: "Smart Reports",
+                feature3Desc: "Track your progress and team tasks with detailed reports and professional charts.",
+                feature4Title: "Perfect for Programming Teams",
+                feature4Desc: "Specially designed to meet the needs of development teams with advanced tools.",
+                feature5Title: "Advanced Security",
+                feature5Desc: "High-level data protection with first-class encryption.",
+                feature6Title: "Available Everywhere",
+                feature6Desc: "Work from anywhere and any device with instant data synchronization.",
+                screenshotsTitle: "App Screenshots",
+                plansTitle: "Subscription Plans",
+                contactTitle: "Contact Us",
+                tryNowTitle: "Try It Now",
+                downloadBtnText: "Download App",
+                emailText: "Contact us by Email",
+                websiteText: "Developer Website",
+                discordText: "Join Discord",
+                footerText: "© 2025 Tasqly. All rights reserved.",
+                langText: "العربية",
+                // langFlag: "🇪🇬",
+                // Free plan
+                freePlanName: "Free Tier",
+                freePeriod: "/month",
+                freeFeature1: "Up to 3 employees",
+                freeFeature2: "Up to 30 tasks per month",
+                freeFeature3: "No notifications or advanced statistics",
+                freeFeature4: "Try the system for free",
+                freeBtn: "Start Free",
+                // Basic plan
+                basicPlanName: "Basic",
+                basicOldPrice: "$5",
+                basicCurrency: "$",
+                basicPrice: "3",
+                basicPeriod: "/month",
+                basicFeature1: "Team of 5 members",
+                basicFeature2: "Up to 50 tasks per month",
+                basicFeature3: "Basic reports",
+                basicFeature4: "Email support",
+                basicFeature5: "5 GB storage",
+                basicFeature6: "Instant notifications",
+                basicBtn: "Start Now",
+                // Pro plan
+                proPlanName: "Pro",
+                proOldPrice: "$10",
+                proCurrency: "$",
+                proPrice: "5",
+                proPeriod: "/month",
+                proFeature1: "Team of 25 members",
+                proFeature2: "Up to 100 tasks per month",
+                proFeature3: "Advanced stats for each employee",
+                proFeature4: "Advanced reports",
+                proFeature5: "Priority support",
+                proFeature6: "100 GB storage",
+                proFeature8: "Instant notifications",
+                proBtn: "Start Now",
+                popularBadge: "Most Popular",
+                employeeText: "Employee View",
+                adminText: "Admin View"
+            }
+        };
+    }
 }
 
-function updatePlanFeatures(lang) {
-    const t = translations[lang];
-    // Free plan
-    for (let i = 1; i <= 4; i++) {
-        const el = document.getElementById(`freeFeature${i}`);
-        if (el) el.textContent = t[`freeFeature${i}`];
+// Global functions for HTML onclick events
+function toggleLanguage() {
+    if (window.tasqlyApp) {
+        window.tasqlyApp.toggleLanguage();
     }
-    // Basic plan
-    for (let i = 1; i <= 6; i++) {
-        const el = document.getElementById(`basicFeature${i}`);
-        if (el) el.textContent = t[`basicFeature${i}`];
-    }
-    // Pro plan
-    // Note: proFeature7 is commented out in your HTML, so skip it
-    [1,2,3,4,5,6,8].forEach(i => {
-        const el = document.getElementById(`proFeature${i}`);
-        if (el) el.textContent = t[`proFeature${i}`];
-    });
 }
+
+function toggleScreenshotView(view) {
+    if (window.tasqlyApp) {
+        window.tasqlyApp.toggleScreenshotView(view);
+    }
+}
+
+function openModal() {
+    if (window.tasqlyApp) {
+        window.tasqlyApp.openModal();
+    }
+}
+
+function closeModal() {
+    if (window.tasqlyApp) {
+        window.tasqlyApp.closeModal();
+    }
+}
+
+// Initialize the application when DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+    window.tasqlyApp = new TasqlyApp();
+});
+
+// Initialize particles when page loads completely
+window.addEventListener('load', function() {
+    if (window.tasqlyApp) {
+        window.tasqlyApp.createParticles();
+    }
+});
